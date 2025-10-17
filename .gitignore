@@ -1,0 +1,10 @@
+# Ignore Python cache and log files
+__pycache__
+log
+backups
+.vscode
+
+# Ignore configuration and environment files
+*.env
+config.json
+
