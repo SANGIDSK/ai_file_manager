@@ -38,11 +38,13 @@ def main():
             print("\n🎯 Custom Folders:")
             for folder in config.custom_folders:
                 print(f"   • {folder}")
-            print(f"\n🎯 Total monitored locations: {len(config.get_all_monitored_paths())}")
+            print("\n🚫 Excluded Folders:")
+            for folder in config.excluded_folders:
+                print(f"   • {folder} (IGNORED)")
+            print(f"\n🎯 Total ACTIVE monitored locations: {len(config.get_all_monitored_paths())}")
         except:
-            print("📀 Monitoring: All available drives")
-            print("📁 Folders: Downloads, Desktop, Documents, etc.")
-            print("🎯 Plus your custom folders on D: drive")
+            print("📀 Monitoring: All drives + your custom folders")
+            print("🚫 Excluded: D:\\ai_file_manager")
         return
     
     if args.start:
