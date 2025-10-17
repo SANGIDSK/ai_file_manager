@@ -30,6 +30,10 @@ class AutoOrganizer:
         locations_organized = []
         
         for path in config.get_all_monitored_paths():
+            # Skip excluded folders
+            if path in config.excluded_folders:
+                continue  # SKIP THIS FOLDER
+            
             try:
                 result = self.organize_folder(path, verbose=False)
                 # Extract number from result string
