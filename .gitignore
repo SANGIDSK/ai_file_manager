@@ -1,6 +1,7 @@
-# Ignore Python cache and log files
+# Ignore Python cache,log files,backups and vscode
 __pycache__/
-log
+*.pyc
+logs
 backups
 .vscode
 
