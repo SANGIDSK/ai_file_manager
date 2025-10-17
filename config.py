@@ -7,7 +7,8 @@ class Config:
     def __init__(self):
         self.monitored_drives = self.get_all_drives()
         self.monitored_folders = self.get_important_folders()
-        self.custom_folders = self.get_custom_folders()  # Your specific folders
+        self.custom_folders = self.get_custom_folders()
+        self.excluded_folders = self.get_excluded_folders()  # NEW: Folders to ignore
         
     def get_all_drives(self):
         """Get all available drives on the system"""
@@ -34,6 +35,7 @@ class Config:
     def get_custom_folders(self):
         """Get your specific folders from D: drive"""
         custom_folders = [
+            "D:\\ai_file_manager",      # Your AI manager folder
             "D:\\Games",                # Games folder
             "D:\\my certificates",      # Certificates
             "D:\\notepad",              # Notepad files
@@ -44,11 +46,21 @@ class Config:
         # Only include folders that actually exist
         return [f for f in custom_folders if Path(f).exists()]
     
+    def get_excluded_folders(self):
+        """Folders to exclude from organization"""
+        excluded = [
+            "D:\\ai_file_manager",      # EXCLUDE the AI manager itself
+            # Add other folders you want to exclude
+            # "D:\\Games",              # Uncomment if you want to exclude Games too
+        ]
+        return [f for f in excluded if Path(f).exists()]
+    
     def get_all_monitored_paths(self):
         """Combine drives, folders, and custom folders for complete monitoring"""
         all_paths = self.monitored_drives + self.monitored_folders + self.custom_folders
-        # Remove duplicates and non-existent paths
-        return list(set([p for p in all_paths if Path(p).exists()]))
+        # Remove excluded folders and non-existent paths
+        filtered_paths = [p for p in all_paths if Path(p).exists() and p not in self.excluded_folders]
+        return list(set(filtered_paths))
 
 # Global config instance
 config = Config()
