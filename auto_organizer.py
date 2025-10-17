@@ -13,6 +13,7 @@ except ImportError:
 
 class AutoOrganizer:
     def __init__(self):
+        ## order to organize files (can change the order in according to preference)
         self.rules = {
             'Images': ['.jpg', '.png', '.gif', '.jpeg', '.bmp', '.svg', '.webp'],
             'Documents': ['.pdf', '.doc', '.docx', '.txt', '.rtf', '.xls', '.xlsx'],
